@@ -8,17 +8,22 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
 
+    public static final long ID = 1L;
     RecipeServiceImpl recipeService;
 
     @Mock
     RecipeRepository recipeRepository;
+
+    Recipe recipe;
 
     @Before
     public void setUp() throws Exception {
@@ -27,16 +32,31 @@ public class RecipeServiceImplTest {
         MockitoAnnotations.initMocks(this);
 
         recipeService = new RecipeServiceImpl(recipeRepository);
+
+        recipe = new Recipe();
     }
 
     @Test
-    public void getRecipes() {
+    public void getRecipeByIdTest() throws Exception {
+        recipe.setId(ID);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
 
-        Recipe recipe = new Recipe();
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findById(ID);
+
+        assertNotNull("Null recipe returned", recipeReturned);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
+    }
+
+    @Test
+    public void getRecipesTest() throws Exception {
+
         HashSet recipesData = new HashSet();
         recipesData.add(recipe);
 
-        when(recipeRepository.findAll()).thenReturn(recipesData);
+        when(recipeService.getRecipes()).thenReturn(recipesData);
 
         Set<Recipe> recipes = recipeService.getRecipes();
 
@@ -44,5 +64,7 @@ public class RecipeServiceImplTest {
 
         //make sure findAll is called only once
         verify(recipeRepository, times(1)).findAll();
+
+        verify(recipeRepository, never()).findById(anyLong());
     }
 }
