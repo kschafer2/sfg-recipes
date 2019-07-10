@@ -1,8 +1,8 @@
 package guru.springframework.converters;
 
-import com.sun.xml.internal.ws.developer.Serialization;
 import guru.springframework.commands.NotesCommand;
 import guru.springframework.domain.Notes;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import javax.validation.constraints.Null;
 @Component
 public class NotesCommandToNotes implements Converter<NotesCommand, Notes> {
 
-    @Serialization
+    @Synchronized
     @Null
     @Override
     public Notes convert(NotesCommand notesCommand) {
