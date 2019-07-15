@@ -25,7 +25,11 @@ public class RecipeControllerTest {
     RecipeService recipeService;
 
     RecipeController controller;
+
+    ExceptionHandlerController exceptionHandlerController;
+
     MockMvc mockMvc;
+
     RecipeCommand command;
 
     @Before
@@ -33,7 +37,10 @@ public class RecipeControllerTest {
         MockitoAnnotations.initMocks(this);
 
         controller = new RecipeController(recipeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        exceptionHandlerController = new ExceptionHandlerController();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(exceptionHandlerController).build();
+
         command = new RecipeCommand();
     }
 
