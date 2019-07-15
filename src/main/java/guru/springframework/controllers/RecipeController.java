@@ -61,6 +61,7 @@ public class RecipeController {
         return "redirect:/";
     }
 
+    //error handling
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception) {
@@ -70,6 +71,21 @@ public class RecipeController {
         ModelAndView modelAndView = new ModelAndView();
 
         modelAndView.setViewName("404error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
+    }
+
+    //error handling
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleNumberFormatError(Exception exception) {
+        log.error("Handling number format exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("400error");
         modelAndView.addObject("exception", exception);
 
         return modelAndView;
