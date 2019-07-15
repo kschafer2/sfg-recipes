@@ -84,7 +84,7 @@ public class IngredientServiceImplTest {
     }
 
     @Test
-    public void testSaveRecipeCommand() throws Exception {
+    public void testSaveIngredientCommand() throws Exception {
         //given
         IngredientCommand command = new IngredientCommand();
         command.setId(3L);
