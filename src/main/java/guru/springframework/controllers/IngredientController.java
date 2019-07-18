@@ -90,7 +90,7 @@ public class IngredientController {
         log.debug("Saved recipe id: " + savedCommand.getRecipeId());
         log.debug("Saved ingredient id: " + savedCommand.getId());
 
-        return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+        return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredients";
     }
 
     //delete
