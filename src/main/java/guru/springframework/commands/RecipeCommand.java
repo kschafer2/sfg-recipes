@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,18 +23,21 @@ public class RecipeCommand {
 
     @Min(1)
     @Max(999)
+    @NotNull
     private Integer prepTime;
 
-    @Min(1)
     @Max(999)
+    @NotNull
     private Integer cookTime;
 
     @Min(1)
     @Max(100)
+    @NotNull
     private Integer servings;
     private String source;
 
     @URL
+    @NotBlank
     private String url;
 
     @NotBlank
