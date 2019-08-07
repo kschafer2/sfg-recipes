@@ -32,8 +32,8 @@ public class Recipe {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") //owns ingredient
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    @Lob //binary large object field
-    private Byte[] image;
+    @OneToOne(cascade = CascadeType.ALL) //owns image
+    private Image image;
 
     @OneToOne(cascade = CascadeType.ALL) //owns notes
     private Notes notes;
@@ -49,6 +49,13 @@ public class Recipe {
         if(notes != null) {
             this.notes = notes;
             notes.setRecipe(this);
+        }
+    }
+    //logic for bidirectional relationship with image
+    public void setImage(Image image) {
+        if(image != null) {
+            this.image = image;
+            image.setRecipe(this);
         }
     }
 

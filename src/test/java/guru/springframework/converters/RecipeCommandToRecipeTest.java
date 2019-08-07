@@ -1,9 +1,6 @@
 package guru.springframework.converters;
 
-import guru.springframework.commands.CategoryCommand;
-import guru.springframework.commands.IngredientCommand;
-import guru.springframework.commands.NotesCommand;
-import guru.springframework.commands.RecipeCommand;
+import guru.springframework.commands.*;
 import guru.springframework.domain.Difficulty;
 import guru.springframework.domain.Recipe;
 import org.junit.Before;
@@ -25,6 +22,7 @@ public class RecipeCommandToRecipeTest {
     public static final Long CAT_ID2 = 2L;
     public static final Long INGRED_ID_1 = 3L;
     public static final Long INGRED_ID_2 = 4L;
+    public static final Long IMAGE_ID = 11L;
     public static final Long NOTES_ID = 9L;
 
     RecipeCommandToRecipe converter;
@@ -34,7 +32,7 @@ public class RecipeCommandToRecipeTest {
     public void setUp() throws Exception {
         converter = new RecipeCommandToRecipe(new CategoryCommandToCategory(),
                 new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
-                new NotesCommandToNotes());
+                new NotesCommandToNotes(), new ImageCommandToImage());
     }
 
     @Test
@@ -61,9 +59,12 @@ public class RecipeCommandToRecipeTest {
         recipeCommand.setSource(SOURCE);
         recipeCommand.setUrl(URL);
 
+        ImageCommand image = new ImageCommand();
+        image.setId(IMAGE_ID);
+        recipeCommand.setImage(image);
+
         NotesCommand notes = new NotesCommand();
         notes.setId(NOTES_ID);
-
         recipeCommand.setNotes(notes);
 
         CategoryCommand category = new CategoryCommand();
@@ -97,6 +98,7 @@ public class RecipeCommandToRecipeTest {
         assertEquals(SERVINGS, recipe.getServings());
         assertEquals(SOURCE, recipe.getSource());
         assertEquals(URL, recipe.getUrl());
+        assertEquals(IMAGE_ID, recipe.getImage().getId());
         assertEquals(NOTES_ID, recipe.getNotes().getId());
         assertEquals(2, recipe.getCategories().size());
         assertEquals(2, recipe.getIngredients().size());

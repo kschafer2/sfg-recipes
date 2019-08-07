@@ -13,13 +13,17 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
     private final CategoryToCategoryCommand categoryConverter;
     private final IngredientToIngredientCommand ingredientConverter;
     private final NotesToNotesCommand notesConverter;
+    private final ImageToImageCommand imageConverter;
 
     public RecipeToRecipeCommand(CategoryToCategoryCommand categoryConverter,
                                  IngredientToIngredientCommand ingredientConverter,
-                                 NotesToNotesCommand notesConverter) {
+                                 NotesToNotesCommand notesConverter,
+                                 ImageToImageCommand imageConverter) {
+
         this.categoryConverter = categoryConverter;
         this.ingredientConverter = ingredientConverter;
         this.notesConverter = notesConverter;
+        this.imageConverter = imageConverter;
     }
 
     @Synchronized
@@ -40,16 +44,20 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
         recipeCommand.setSource(recipe.getSource());
         recipeCommand.setUrl(recipe.getUrl());
         recipeCommand.setDirections(recipe.getDirections());
-        recipeCommand.setImage(recipe.getImage());
         recipeCommand.setDifficulty(recipe.getDifficulty());
+        recipeCommand.setImage(imageConverter.convert(recipe.getImage()));
         recipeCommand.setNotes(notesConverter.convert(recipe.getNotes()));
 
+        // convert each Category in recipe to CategoryCommand,
+        // then add to recipeCommand's set of categories
         if(recipe.getCategories() != null && recipe.getCategories().size() > 0) {
             recipe.getCategories()
                     .forEach(category -> recipeCommand.getCategories()
                             .add(categoryConverter.convert(category)));
         }
 
+        // convert each Ingredient in recipe to IngredientCommand,
+        // then add to recipeCommand's set of ingredients
         if(recipe.getIngredients() != null && recipe.getIngredients().size() > 0) {
             recipe.getIngredients()
                     .forEach(ingredient -> recipeCommand.getIngredients()

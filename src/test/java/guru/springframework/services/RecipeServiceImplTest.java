@@ -1,6 +1,7 @@
 package guru.springframework.services;
 
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.converters.ImageToImageCommand;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.domain.Recipe;
@@ -33,6 +34,9 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeCommandToRecipe recipeCommandToRecipe;
 
+    @Mock
+    ImageToImageCommand imageToImageCommand;
+
     Recipe recipe;
 
     @Before
@@ -41,7 +45,7 @@ public class RecipeServiceImplTest {
         //give a mock recipe repository
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand, imageToImageCommand);
 
         recipe = new Recipe();
     }
@@ -85,7 +89,7 @@ public class RecipeServiceImplTest {
 
         when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
 
-        RecipeCommand commandById = recipeService.findCommandById(1L);
+        RecipeCommand commandById = recipeService.getCommandById(1L);
 
         //then
         assertNotNull("Null recipe returned", commandById);

@@ -1,6 +1,7 @@
 package guru.springframework.controllers;
 
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.converters.BytesWrappedToBytesUnwrapped;
 import guru.springframework.services.ImageService;
 import guru.springframework.services.RecipeService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -30,13 +31,13 @@ public class ImageController {
 
     @GetMapping("recipe/{id}/image")
     public String showUploadForm(@PathVariable String id, Model model) {
-        model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
+        model.addAttribute("recipe", recipeService.getCommandById(Long.valueOf(id)));
 
         return "recipe/imageuploadform";
     }
 
     @PostMapping("recipe/{id}/image")
-    public String showUploadForm(@PathVariable String id, @RequestParam("imagefile") MultipartFile file) {
+    public String addImage(@PathVariable String id, @RequestParam("imagefile") MultipartFile file) {
         imageService.saveImageFile(Long.valueOf(id), file);
 
         return "redirect:/recipe/" + id + "/show";
@@ -44,16 +45,16 @@ public class ImageController {
 
     @GetMapping("recipe/{id}/recipeimage")
     public void renderImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException {
-        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(id));
+        RecipeCommand recipeCommand = recipeService.getCommandById(Long.valueOf(id));
 
         if(recipeCommand.getImage() != null) {
-            byte[] byteArray = new byte[recipeCommand.getImage().length];
-            int i = 0;
-
-            for(Byte wrappedByte : recipeCommand.getImage()) {
-                byteArray[i++] = wrappedByte; //auto unboxing
-            }
-
+            byte[] byteArray = new BytesWrappedToBytesUnwrapped()
+                    .convert(recipeCommand.getImage().getImageBytes());
+//            byte[] byteArray = new byte[recipeCommand.getImage().length];
+//            int i = 0;
+//
+//            for(Byte wrappedByte : recipeCommand.getImage()) {
+//                byteArray[i++] = wrappedByte; //auto unboxing
             response.setContentType("image/jpeg");
             InputStream is = new ByteArrayInputStream(byteArray);
             IOUtils.copy(is, response.getOutputStream());

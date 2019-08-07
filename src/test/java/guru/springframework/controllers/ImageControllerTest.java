@@ -1,6 +1,8 @@
 package guru.springframework.controllers;
 
+import guru.springframework.commands.ImageCommand;
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.converters.BytesUnwrappedToBytesWrapped;
 import guru.springframework.services.ImageService;
 import guru.springframework.services.RecipeService;
 import org.junit.Before;
@@ -48,14 +50,14 @@ public class ImageControllerTest {
         RecipeCommand command = new RecipeCommand();
         command.setId(1L);
 
-        when(recipeService.findCommandById(anyLong())).thenReturn(command);
+        when(recipeService.getCommandById(anyLong())).thenReturn(command);
 
         //when
         mockMvc.perform(get("/recipe/1/image"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("recipe"));
 
-        verify(recipeService, times(1)).findCommandById(anyLong());
+        verify(recipeService, times(1)).getCommandById(anyLong());
     }
 
     @Test
@@ -78,17 +80,15 @@ public class ImageControllerTest {
         command.setId(1L);
 
         String s = "fake image text";
-        Byte[] bytesBoxed = new Byte[s.getBytes().length];
 
-        int i = 0;
+        Byte[] bytesBoxed = new BytesUnwrappedToBytesWrapped().convert(s.getBytes());
 
-        for(byte primByte : s.getBytes()) {
-            bytesBoxed[i++] = primByte;
-        }
+        ImageCommand imageCommand = new ImageCommand();
+        imageCommand.setImageBytes(bytesBoxed);
 
-        command.setImage(bytesBoxed);
+        command.setImage(imageCommand);
 
-        when(recipeService.findCommandById(anyLong())).thenReturn(command);
+        when(recipeService.getCommandById(anyLong())).thenReturn(command);
 
         //when
         MockHttpServletResponse response = mockMvc.perform(get("/recipe/1/recipeimage"))

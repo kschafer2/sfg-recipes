@@ -4,15 +4,14 @@ import guru.springframework.commands.NotesCommand;
 import guru.springframework.domain.Notes;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-
-import javax.validation.constraints.Null;
 
 @Component
 public class NotesCommandToNotes implements Converter<NotesCommand, Notes> {
 
     @Synchronized
-    @Null
+    @Nullable
     @Override
     public Notes convert(NotesCommand notesCommand) {
         if(notesCommand == null) {

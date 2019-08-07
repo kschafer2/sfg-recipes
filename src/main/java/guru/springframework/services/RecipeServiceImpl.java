@@ -1,6 +1,7 @@
 package guru.springframework.services;
 
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.converters.ImageToImageCommand;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.domain.Recipe;
@@ -21,13 +22,16 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository recipeRepository;
     private final RecipeCommandToRecipe recipeCommandToRecipe;
     private final RecipeToRecipeCommand recipeToRecipeCommand;
+    private final ImageToImageCommand imageToImageCommand;
 
     public RecipeServiceImpl(RecipeRepository recipeRepository,
                              RecipeCommandToRecipe recipeCommandToRecipe,
-                             RecipeToRecipeCommand recipeToRecipeCommand) {
+                             RecipeToRecipeCommand recipeToRecipeCommand,
+                             ImageToImageCommand imageToImageCommand) {
         this.recipeRepository = recipeRepository;
         this.recipeCommandToRecipe = recipeCommandToRecipe;
         this.recipeToRecipeCommand = recipeToRecipeCommand;
+        this.imageToImageCommand = imageToImageCommand;
     }
 
     @Override
@@ -41,13 +45,13 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe findById(Long l) {
-        Optional<Recipe> recipeOptional = recipeRepository.findById(l);
+    public Recipe findById(Long id) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if(!recipeOptional.isPresent()) {
 
             //throw custom exception
-            throw new NotFoundException("Recipe Not Found For ID Value: " + l.toString());
+            throw new NotFoundException("Recipe Not Found For ID Value: " + id.toString());
         }
 
         return recipeOptional.get();
@@ -55,8 +59,8 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Transactional
     @Override
-    public RecipeCommand findCommandById(Long l) {
-        return recipeToRecipeCommand.convert(findById(l));
+    public RecipeCommand getCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findById(id));
     }
 
     @Transactional
@@ -64,7 +68,17 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
         if(recipeCommand.getId() != null) {
             Recipe originalRecipe = this.findById(recipeCommand.getId());
-            recipeCommand.getNotes().setId(originalRecipe.getNotes().getId());
+
+            if(recipeCommand.getImage() != null) {
+                recipeCommand.getImage().setId(originalRecipe.getImage().getId());
+            } else {
+                if(originalRecipe.getImage() != null) {
+                    recipeCommand.setImage(imageToImageCommand.convert(originalRecipe.getImage()));
+                }
+            }
+            if(recipeCommand.getNotes() != null) {
+                recipeCommand.getNotes().setId(originalRecipe.getNotes().getId());
+            }
         }
 
         Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
@@ -76,7 +90,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void deleteById(Long l) {
-        recipeRepository.deleteById(l);
+    public void deleteById(Long id) {
+        recipeRepository.deleteById(id);
     }
 }
