@@ -28,14 +28,7 @@ public class ImageServiceImpl implements ImageService {
             Recipe recipe = recipeRepository.findById(recipeId).get();
 
             Byte[] imageBytes = new BytesUnwrappedToBytesWrapped().convert(file.getBytes());
-//            //todo create wrap method
-//            Byte[] byteObjects = new Byte[file.getBytes().length];
-//
-//            int i = 0;
-//
-//            for(byte b : file.getBytes()) {
-//                byteObjects[i++] = b;
-//            }
+
             Image image = new Image();
             image.setImageBytes(imageBytes);
 

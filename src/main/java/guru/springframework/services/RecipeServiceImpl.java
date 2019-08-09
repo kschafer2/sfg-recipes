@@ -1,6 +1,7 @@
 package guru.springframework.services;
 
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.converters.CategoryToCategoryCommand;
 import guru.springframework.converters.ImageToImageCommand;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
@@ -23,15 +24,19 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeCommandToRecipe recipeCommandToRecipe;
     private final RecipeToRecipeCommand recipeToRecipeCommand;
     private final ImageToImageCommand imageToImageCommand;
+    private final CategoryToCategoryCommand categoryToCategoryCommand;
 
     public RecipeServiceImpl(RecipeRepository recipeRepository,
                              RecipeCommandToRecipe recipeCommandToRecipe,
                              RecipeToRecipeCommand recipeToRecipeCommand,
-                             ImageToImageCommand imageToImageCommand) {
+                             ImageToImageCommand imageToImageCommand,
+                             CategoryToCategoryCommand categoryToCategoryCommand) {
+
         this.recipeRepository = recipeRepository;
         this.recipeCommandToRecipe = recipeCommandToRecipe;
         this.recipeToRecipeCommand = recipeToRecipeCommand;
         this.imageToImageCommand = imageToImageCommand;
+        this.categoryToCategoryCommand = categoryToCategoryCommand;
     }
 
     @Override
@@ -78,6 +83,15 @@ public class RecipeServiceImpl implements RecipeService {
             }
             if(recipeCommand.getNotes() != null) {
                 recipeCommand.getNotes().setId(originalRecipe.getNotes().getId());
+            }
+
+            if(recipeCommand.getCategories().size() == 0 &&
+                    originalRecipe.getCategories().size() > 0) {
+
+                originalRecipe.getCategories()
+                        .forEach(category -> recipeCommand.getCategories()
+                                .add(categoryToCategoryCommand.convert(category)));
+
             }
         }
 

@@ -87,12 +87,13 @@ public class IngredientServiceImpl implements IngredientService {
             }
             Recipe savedRecipe = recipeRepository.save(recipe);
 
+            //search for ingredient by id
             Optional<Ingredient> savedIngredientOptional = savedRecipe.getIngredients()
                     .stream()
                     .filter(recipeIngredients -> recipeIngredients.getId().equals(command.getId()))
                     .findFirst();
 
-            //check by description, amount, and uomId
+            //otherwise, search for ingredient by description, amount, and uomId
             if(!savedIngredientOptional.isPresent()) {
                 //may not be safe
                 savedIngredientOptional = savedRecipe.getIngredients()

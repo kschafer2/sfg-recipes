@@ -21,6 +21,32 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h1 class="panel-title">Navigation</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-2">
+                        <a class="btn btn-default" href="/"
+                           role="button">Return Home</a>
+                    </div>
+                    <div class="col-md-2 col-md-offset-2">
+                        <a class="btn btn-default" href="#" th:href="@{'/recipe/' + ${ingredient.getRecipeId()} + '/show'}"
+                           role="button">Return to Recipe</a>
+                    </div>
+                    <div class="col-md-2 col-md-offset-2">
+                        <a class="btn btn-default" href="#"
+                           th:href="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredients'}"
+                           role="button">Return to Ingredients List</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="panel panel-primary">
 
                 <div class="panel-heading">

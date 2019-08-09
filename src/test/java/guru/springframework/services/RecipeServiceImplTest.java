@@ -1,6 +1,7 @@
 package guru.springframework.services;
 
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.converters.CategoryToCategoryCommand;
 import guru.springframework.converters.ImageToImageCommand;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
@@ -37,6 +38,9 @@ public class RecipeServiceImplTest {
     @Mock
     ImageToImageCommand imageToImageCommand;
 
+    @Mock
+    CategoryToCategoryCommand categoryToCategoryCommand;
+
     Recipe recipe;
 
     @Before
@@ -45,7 +49,11 @@ public class RecipeServiceImplTest {
         //give a mock recipe repository
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand, imageToImageCommand);
+        recipeService = new RecipeServiceImpl(recipeRepository,
+                                                recipeCommandToRecipe,
+                                                recipeToRecipeCommand,
+                                                imageToImageCommand,
+                                                categoryToCategoryCommand);
 
         recipe = new Recipe();
     }
