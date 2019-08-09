@@ -13,7 +13,7 @@ Ex: localhost:8080
 ## Features:
 ### View Recipes List
 A list of all recipes will appear at the root URL (home page). The application will load two recipes on startup.
-![Home Page](https://github.com/kschafer2/sfg-recipes/blob/media/home-page.png)
+[![Home Page](https://github.com/kschafer2/sfg-recipes/blob/media/home-page.png)](#)
  <a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/home-page.png" /></a>
 ### View a Specific Recipe
 Click the 'View' button next to any recipe to view details about the recipe. From the recipe's view page, you may 
