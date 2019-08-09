@@ -41,8 +41,8 @@ From the recipe ingredient list page, click the 'View' button next to any ingred
 [![View Ingredient](https://github.com/kschafer2/sfg-recipes/blob/media/view-ingredient.png)](#)
 
 ## Create an Ingredient
-The 'New' button on the ingredient list page will open a blank recipe form for a new recipe.
-[![Create Ingredient](https://github.com/kschafer2/sfg-recipes/blob/media/update-ingredient.png)](#)
+The 'New' button on the ingredient list page will open a blank ingredient form for a new ingredient.
+[![Create Ingredient](https://github.com/kschafer2/sfg-recipes/blob/media/create-ingredient.png)](#)
 
 ## Update an Ingredient
 Click the 'Update' button next to any ingredient to update the ingredient's details.
