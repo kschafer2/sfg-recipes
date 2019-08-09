@@ -10,10 +10,10 @@ machine. Create a new project in your favorite IDE, then build and run the proje
 any web browser at the address of your local machine with the port number Tomcat is running on (default 8080).
 Ex: localhost:8080
 
-##Features:
+## Features:
 ### View Recipes List
 A list of all recipes will appear at the root URL (home page). The application will load two recipes on startup.
-![Home Page](https://github.com/kschafer2/sfg-recipes/blob/media/home-page.png)
+![Home Page](https://github.com/kschafer2/sfg-recipes/blob/media/home-page.png)[]()
 ### View a Specific Recipe
 Click the 'View' button next to any recipe to view details about the recipe. From the recipe's view page, you may 
 change the recipe's picture and access the recipe's ingredients.
