@@ -30,7 +30,7 @@ for the new recipe.
 Click the 'Update' button next to any recipe to update the recipe's details.
 [![Update Recipe](https://github.com/kschafer2/sfg-recipes/blob/media/update-recipe.png)](#)
 
-### Access a Recipe's Ingredients
+### Recipe Ingredient List
 To access a list of all the recipe's ingredients, click the 'View' button next to the ingredients. From the ingredient 
 list page, you may view, update, or delete an ingredient. You may also create new ingredients.
 [![View Ingredient List](https://github.com/kschafer2/sfg-recipes/blob/media/view-ingredient-list.png)](#)
@@ -38,8 +38,10 @@ list page, you may view, update, or delete an ingredient. You may also create ne
 ### View a Specific Ingredient
 From the recipe ingredient list page, click the 'View' button next to any ingredient to view.
 [![View Ingredient](https://github.com/kschafer2/sfg-recipes/blob/media/view-ingredient.png)](#)
+
 ### Create an Ingredient
 The 'New' button on the ingredient list page will open a blank recipe form for a new recipe.
+[![Create Ingredient](https://github.com/kschafer2/sfg-recipes/blob/media/update-ingredient.png)](#)
 
 ### Update an Ingredient
 Click the 'Update' button next to any ingredient to update the ingredient's details.
