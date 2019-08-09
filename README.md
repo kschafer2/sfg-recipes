@@ -14,24 +14,27 @@ Ex: localhost:8080
 ### View Recipes List
 A list of all recipes will appear at the root URL (home page). The application will load two recipes on startup.
 [![Home Page](https://github.com/kschafer2/sfg-recipes/blob/media/home-page.png)](#)
- <a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/home-page.png" /></a>
+
 ### View a Specific Recipe
 Click the 'View' button next to any recipe to view details about the recipe. From the recipe's view page, you may 
 change the recipe's picture and access the recipe's ingredients.
+[![View Recipe](https://github.com/kschafer2/sfg-recipes/blob/media/view-recipe.png)](#)
 
 ### Create a Recipe
 Create a new recipe with the 'New' button at the top of the recipe list on the home page. A blank recipe form will open 
 for the new recipe.
+[![Create Recipe](https://github.com/kschafer2/sfg-recipes/blob/media/create-recipe.png)](#)
 
 ### Update a Recipe
-Click the 'Update' button next to any recipe to update recipe details.
+Click the 'Update' button next to any recipe to update the recipe's details.
+[![Update Recipe](https://github.com/kschafer2/sfg-recipes/blob/media/update-recipe.png)](#)
 
 ### Delete a Recipe
 Delete a recipe with the 'Delete' button next to the recipe on the home page.
 
 ### View a Recipe's Ingredients List
 To access all ingredients in a recipe, click the 'View' button next to the ingredients.
-
+[![View Ingredient List](https://github.com/kschafer2/sfg-recipes/blob/media/view-ingredient-list.png)](#)
 ### View a Specific Ingredient
 From the recipe ingredient list page, click the 'View' button next to any ingredient to view.
 
@@ -40,6 +43,7 @@ The 'New' button on the ingredient list page will open a blank recipe form for a
 
 ### Update an Ingredient
 Click the 'Update' button next to any ingredient to update the ingredient's details.
+[![Update Ingredient](https://github.com/kschafer2/sfg-recipes/blob/media/update-ingredient.png)](#)
 
 ### Delete an Ingredient
 To delete an ingredient, click the 'Delete' button next to the ingredient.
