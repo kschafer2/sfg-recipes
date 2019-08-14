@@ -89,6 +89,7 @@ public class ImageControllerTest {
         command.setImage(imageCommand);
 
         when(recipeService.getCommandById(anyLong())).thenReturn(command);
+        when(imageService.getImageByteArray(any())).thenReturn(imageCommand.getImageBytes());
 
         //when
         MockHttpServletResponse response = mockMvc.perform(get("/recipe/1/recipeimage"))
