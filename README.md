@@ -15,38 +15,54 @@ Ex: localhost:8080
 ## Home Page
 A list of all recipes will appear on the home page. The application will load two recipes on startup. From here, you may 
 view, update, or delete an existing recipe, or you may choose to create a new recipe.
-[![Home Page](https://github.com/kschafer2/sfg-recipes/blob/media/home-page.png)](#)
+
+<a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/home-page.png" 
+alt="Home Page" width="600" /></a>
+
 
 ## Recipe Main Page
 Click the 'View' button next to any recipe to navigate to the recipe's main page. From the recipe's main page, you may 
 view details about the recipe, change the recipe's picture, or access the recipe's ingredients.
-[![View Recipe](https://github.com/kschafer2/sfg-recipes/blob/media/view-recipe.png)](#)
+
+<a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/view-recipe.png" 
+alt="View Recipe" width="600" /></a>
 
 ## Create a Recipe
-Create a new recipe with the 'New' button at the top of the recipe list on the home page. A blank recipe form will open 
-for the new recipe.
-[![Create Recipe](https://github.com/kschafer2/sfg-recipes/blob/media/create-recipe.png)](#)
+Create a new recipe with the 'New' button at the top of the recipe list on the home page. A blank recipe form will open for the new recipe.
+
+<a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/create-recipe.png" 
+alt="Create Recipe" width="600" /></a>
 
 ## Update a Recipe
 Click the 'Update' button next to any recipe to update the recipe's details.
-[![Update Recipe](https://github.com/kschafer2/sfg-recipes/blob/media/update-recipe.png)](#)
+
+<a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/update-recipe.png" 
+alt="Update Recipe" width="600" /></a>
 
 ## Recipe Ingredient List
 To access a list of all the recipe's ingredients, click the 'View' button next to the ingredients. From the ingredient 
 list page, you may view, update, or delete an ingredient. You may also create new ingredients.
-[![View Ingredient List](https://github.com/kschafer2/sfg-recipes/blob/media/view-ingredient-list.png)](#)
+
+<a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/view-ingredient-list.png" 
+alt="View Ingredient List" width="600" /></a>
 
 ## View a Specific Ingredient
 From the recipe ingredient list page, click the 'View' button next to any ingredient to view.
-[![View Ingredient](https://github.com/kschafer2/sfg-recipes/blob/media/view-ingredient.png)](#)
+
+<a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/view-ingredient.png" 
+alt="View Ingredient" width="600" /></a>
 
 ## Create an Ingredient
 The 'New' button on the ingredient list page will open a blank ingredient form for a new ingredient.
-[![Create Ingredient](https://github.com/kschafer2/sfg-recipes/blob/media/create-ingredient.png)](#)
+
+<a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/create-ingredient.png" 
+alt="Create Ingredient" width="600" /></a>
 
 ## Update an Ingredient
 Click the 'Update' button next to any ingredient to update the ingredient's details.
-[![Update Ingredient](https://github.com/kschafer2/sfg-recipes/blob/media/update-ingredient.png)](#)
+
+<a href="#"><img src="https://github.com/kschafer2/sfg-recipes/blob/media/update-ingredient.png" 
+alt="Update Ingredient" width="600" /></a>
 
 
 

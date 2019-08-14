@@ -49,14 +49,6 @@ public class ImageController {
 
         byte[] byteArray = new BytesWrappedToBytesUnwrapped()
                 .convert(imageService.getImageByteArray(recipeCommand.getImage()));
-//        final BytesWrappedToBytesUnwrapped unwrapper = new BytesWrappedToBytesUnwrapped();
-//        byte[] byteArray;
-//
-//        if(recipeCommand.getImage() != null) {
-//            byteArray = unwrapper.convert(recipeCommand.getImage().getImageBytes());
-//        } else {
-//            byteArray = unwrapper.convert(getDefaultImage().getImageBytes());
-//        }
 
             response.setContentType("image/jpeg");
             InputStream is = new ByteArrayInputStream(byteArray);
