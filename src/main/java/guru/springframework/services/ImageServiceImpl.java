@@ -26,9 +26,7 @@ public class ImageServiceImpl implements ImageService {
     public void saveImageFile(Long recipeId, MultipartFile file) {
         try{
             Recipe recipe = recipeRepository.findById(recipeId).get();
-
             Byte[] imageBytes = new BytesUnwrappedToBytesWrapped().convert(file.getBytes());
-
             Image image = new Image();
             image.setImageBytes(imageBytes);
 

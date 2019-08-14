@@ -1,5 +1,6 @@
 package guru.springframework.bootstrap;
 
+import guru.springframework.converters.BytesUnwrappedToBytesWrapped;
 import guru.springframework.domain.*;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.RecipeRepository;
@@ -9,7 +10,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,6 +180,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.getCategories().add(mexicanCategory);
         guacRecipe.getCategories().add(americanCategory);
 
+        setRecipeImage("src/main/resources/static/images/guacamole400x400.jpg", guacRecipe);
+
         //add to return list
         recipes.add(guacRecipe);
 
@@ -271,9 +279,28 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.getCategories().add(mexicanCategory);
         tacosRecipe.getCategories().add(americanCategory);
 
+        setRecipeImage("src/main/resources/static/images/tacos400x400.jpg", tacosRecipe);
+
         //add to return list
         recipes.add(tacosRecipe);
 
         return recipes;
+    }
+
+    private void setRecipeImage(String pathname, Recipe guacRecipe) {
+        File imageFile = new File(pathname);
+
+        try {
+            BufferedImage bufferedImage = ImageIO.read(imageFile);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "jpg", outputStream);
+            Image guacImage = new Image();
+            Byte[] guacImageBytes = new BytesUnwrappedToBytesWrapped().convert(outputStream.toByteArray());
+            guacImage.setImageBytes(guacImageBytes);
+            guacRecipe.setImage(guacImage);
+
+        } catch(IOException e) {
+            log.error("Unable to add image from filepath: " + imageFile.getAbsolutePath());
+        }
     }
 }
