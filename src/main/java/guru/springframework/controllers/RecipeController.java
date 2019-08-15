@@ -37,6 +37,8 @@ public class RecipeController {
     public String newRecipe(Model model) {
         model.addAttribute("recipe", new RecipeCommand());
 
+        //todo add attribute categoriesList
+
         return RECIPE_RECIPEFORM_URL;
     }
 
@@ -44,6 +46,8 @@ public class RecipeController {
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
         model.addAttribute("recipe", recipeService.getCommandById(Long.valueOf(id)));
+
+        //todo add attribute categoriesList
 
         return RECIPE_RECIPEFORM_URL;
     }

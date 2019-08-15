@@ -21,9 +21,12 @@ import java.io.IOException;
 public class ImageServiceImpl implements ImageService {
 
     private final RecipeRepository recipeRepository;
+    private final BytesUnwrappedToBytesWrapped bytesUnwrappedToBytesWrapped;
 
-    public ImageServiceImpl(RecipeRepository recipeRepository) {
+    public ImageServiceImpl(RecipeRepository recipeRepository,
+                            BytesUnwrappedToBytesWrapped bytesUnwrappedToBytesWrapped) {
         this.recipeRepository = recipeRepository;
+        this.bytesUnwrappedToBytesWrapped = bytesUnwrappedToBytesWrapped;
     }
 
     @Transactional
@@ -31,7 +34,7 @@ public class ImageServiceImpl implements ImageService {
     public void saveImageFile(Long recipeId, MultipartFile file) {
         try {
             Recipe recipe = recipeRepository.findById(recipeId).get();
-            Byte[] imageBytes = new BytesUnwrappedToBytesWrapped().convert(file.getBytes());
+            Byte[] imageBytes = bytesUnwrappedToBytesWrapped.convert(file.getBytes());
             Image image = new Image();
             image.setImageBytes(imageBytes);
 
@@ -47,7 +50,6 @@ public class ImageServiceImpl implements ImageService {
     }
 
     public Byte[] getImageByteArray(ImageCommand imageCommand) {
-        final BytesUnwrappedToBytesWrapped wrapper = new BytesUnwrappedToBytesWrapped();
         byte[] byteArray;
 
         if (imageCommand != null) {
@@ -60,7 +62,7 @@ public class ImageServiceImpl implements ImageService {
 
                 ImageIO.write(bufferedImage, "jpg", outputStream);
 
-                return new BytesUnwrappedToBytesWrapped().convert(outputStream.toByteArray());
+                return bytesUnwrappedToBytesWrapped.convert(outputStream.toByteArray());
             } catch (IOException e) {
                 log.error("Unable to add image from filepath: " + imageFile.getAbsolutePath());
             }

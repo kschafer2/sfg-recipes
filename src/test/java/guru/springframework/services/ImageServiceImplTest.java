@@ -1,5 +1,6 @@
 package guru.springframework.services;
 
+import guru.springframework.converters.BytesUnwrappedToBytesWrapped;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import org.junit.Before;
@@ -27,7 +28,8 @@ public class ImageServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        imageService = new ImageServiceImpl(recipeRepository);
+        imageService = new ImageServiceImpl(recipeRepository,
+                                            new BytesUnwrappedToBytesWrapped());
     }
 
     @Test

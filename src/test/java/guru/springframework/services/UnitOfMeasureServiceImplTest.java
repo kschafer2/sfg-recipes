@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 public class UnitOfMeasureServiceImplTest {
 
     UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand;
-    UnitOfMeasureService service;
+    UnitOfMeasureService unitOfMeasureService;
 
     @Mock
     UnitOfMeasureRepository unitOfMeasureRepository;
@@ -31,7 +31,8 @@ public class UnitOfMeasureServiceImplTest {
     public void SetUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        service = new UnitOfMeasureServiceImpl(unitOfMeasureRepository, unitOfMeasureToUnitOfMeasureCommand);
+        unitOfMeasureService = new UnitOfMeasureServiceImpl(unitOfMeasureRepository,
+                                                            unitOfMeasureToUnitOfMeasureCommand);
     }
 
     @Test
@@ -50,12 +51,10 @@ public class UnitOfMeasureServiceImplTest {
         when(unitOfMeasureRepository.findAll()).thenReturn(unitOfMeasures);
 
         //when
-        Set<UnitOfMeasureCommand> commands = service.listAllUoms();
+        Set<UnitOfMeasureCommand> commands = unitOfMeasureService.listAllUoms();
 
         //then
         assertEquals(2, commands.size());
         verify(unitOfMeasureRepository, times(1)).findAll();
-
-
     }
 }
