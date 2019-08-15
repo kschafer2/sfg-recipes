@@ -1,8 +1,12 @@
-[![CircleCI](https://circleci.com/gh/kschafer2/sfg-recipes.svg?style=svg)](https://circleci.com/gh/kschafer2/sfg-recipes)
+
+![logo](src/main/resources/static/images/logo.png)
 
 # Spring Recipes Web Application
+
 A simple recipe application created with help from John Thompson's 
 [Spring Framework 5: Beginner to Guru](https://github.com/springframeworkguru)
+
+[![CircleCI](https://circleci.com/gh/kschafer2/sfg-recipes.svg?style=svg)](https://circleci.com/gh/kschafer2/sfg-recipes)
 
 ## How to run: 
 Download and install [Maven](https://maven.apache.org/download.cgi) and clone this repository to your local 
