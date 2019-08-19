@@ -41,12 +41,16 @@ public class ImageServiceImpl implements ImageService {
             Recipe recipe = recipeRepository.findById(recipeId).get();
             Byte[] imageBytes = bytesUnwrappedToBytesWrapped.convert(file.getBytes());
             Image image = new Image();
+
             image.setImageBytes(imageBytes);
 
+            if(recipe.getImage() != null && recipe.getImage().getId() != null) {
+                image.setId(recipe.getImage().getId());
+            }
             recipe.setImage(image);
-
             recipeRepository.save(recipe);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             //todo handle better
             log.error("Error occurred", e);
 
