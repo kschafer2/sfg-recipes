@@ -3,11 +3,13 @@ package guru.springframework.services;
 import guru.springframework.commands.CategoryCommand;
 import guru.springframework.converters.CategoryToCategoryCommand;
 import guru.springframework.repositories.CategoryRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;

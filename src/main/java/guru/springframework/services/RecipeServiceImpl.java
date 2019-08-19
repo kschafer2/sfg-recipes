@@ -1,5 +1,6 @@
 package guru.springframework.services;
 
+import guru.springframework.commands.CategoryCommand;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.converters.CategoryToCategoryCommand;
 import guru.springframework.converters.ImageToImageCommand;
@@ -71,6 +72,15 @@ public class RecipeServiceImpl implements RecipeService {
     @Transactional
     @Override
     public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
+        if(recipeCommand.getCategories().size() == 0 && recipeCommand.getCategoryIds().size() > 0) {
+
+            for(String id : recipeCommand.getCategoryIds()) {
+                CategoryCommand categoryCommand = new CategoryCommand();
+                categoryCommand.setId(Long.valueOf(id));
+                recipeCommand.getCategories().add(categoryCommand);
+            }
+        }
+
         if(recipeCommand.getId() != null) {
             Recipe originalRecipe = this.findById(recipeCommand.getId());
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <title>Recipe Form</title>
@@ -46,23 +46,18 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="row" th:remove="all">
+                            <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Categories:</label>
                                 </div>
                                 <div class="col-md-9 form-group">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Cat 1
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Cat 2
-                                        </label>
-                                    </div>
+                                        <div th:each="category : ${categoryList}">
+                                            <label th:for="${#ids.next('categoryIds')}" th:text="${category.description}">Category Name</label>
+                                            <input type="checkbox"
+                                                   th:field="*{categoryIds}"
+                                                   th:value="${category.id}"
+                                                   th:checked="${recipe.categoryIds.contains(category.id)}" />
+                                        </div>
                                 </div>
                             </div>
                             <div class="row">
