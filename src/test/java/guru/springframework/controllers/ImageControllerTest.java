@@ -3,6 +3,7 @@ package guru.springframework.controllers;
 import guru.springframework.commands.ImageCommand;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.converters.BytesUnwrappedToBytesWrapped;
+import guru.springframework.converters.BytesWrappedToBytesUnwrapped;
 import guru.springframework.services.ImageService;
 import guru.springframework.services.RecipeService;
 import org.junit.Before;
@@ -76,12 +77,14 @@ public class ImageControllerTest {
     @Test
     public void renderImageFromDB() throws Exception {
         //given
+        BytesUnwrappedToBytesWrapped bytesUnwrappedToBytesWrapped = new BytesUnwrappedToBytesWrapped();
+        BytesWrappedToBytesUnwrapped bytesWrappedToBytesUnwrapped = new BytesWrappedToBytesUnwrapped();
         RecipeCommand command = new RecipeCommand();
         command.setId(1L);
 
-        String s = "fake image text";
+        byte[] fakeImageBytes = "fake image text".getBytes();
 
-        Byte[] bytesBoxed = new BytesUnwrappedToBytesWrapped().convert(s.getBytes());
+        Byte[] bytesBoxed = new BytesUnwrappedToBytesWrapped().convert(fakeImageBytes);
 
         ImageCommand imageCommand = new ImageCommand();
         imageCommand.setImageBytes(bytesBoxed);
@@ -89,7 +92,9 @@ public class ImageControllerTest {
         command.setImage(imageCommand);
 
         when(recipeService.getCommandById(anyLong())).thenReturn(command);
-        when(imageService.getImageByteArray(any())).thenReturn(imageCommand.getImageBytes());
+
+        when(imageService.getImageBytesFromRecipeOrDefault(any(), anyString()))
+                .thenReturn(bytesWrappedToBytesUnwrapped.convert(imageCommand.getImageBytes()));
 
         //when
         MockHttpServletResponse response = mockMvc.perform(get("/recipe/1/recipeimage"))
@@ -98,7 +103,7 @@ public class ImageControllerTest {
 
         byte[] responseBytes = response.getContentAsByteArray();
 
-        assertEquals(s.getBytes().length, responseBytes.length);
+        assertEquals(fakeImageBytes.length, responseBytes.length);
     }
 
     @Test

@@ -1,7 +1,6 @@
 package guru.springframework.controllers;
 
 import guru.springframework.commands.RecipeCommand;
-import guru.springframework.converters.BytesWrappedToBytesUnwrapped;
 import guru.springframework.services.ImageService;
 import guru.springframework.services.RecipeService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -21,6 +20,7 @@ import java.io.InputStream;
 @Controller
 public class ImageController {
 
+    public static final String DEFAULT_IMAGE_PATH = "src/main/resources/static/images/default.jpg";
     private final ImageService imageService;
     private final RecipeService recipeService;
 
@@ -47,8 +47,7 @@ public class ImageController {
     public void renderImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException {
         RecipeCommand recipeCommand = recipeService.getCommandById(Long.valueOf(id));
 
-        byte[] byteArray = new BytesWrappedToBytesUnwrapped()
-                .convert(imageService.getImageByteArray(recipeCommand.getImage()));
+        byte[] byteArray = imageService.getImageBytesFromRecipeOrDefault(recipeCommand, DEFAULT_IMAGE_PATH);
 
             response.setContentType("image/jpeg");
             InputStream is = new ByteArrayInputStream(byteArray);
