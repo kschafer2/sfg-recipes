@@ -63,8 +63,8 @@
                             <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('prepTime')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>Prep Time:</label>
-                                    <input type="text" class="form-control" th:field="*{prepTime}" th:errorclass="has-error"/>
+                                    <label>Prep Time (min.):</label>
+                                    <input type="number" class="form-control" th:field="*{prepTime}" th:errorclass="has-error"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('prepTime')}">
                                         <ul>
                                             <li th:each="err : ${#fields.errors('prepTime')}" th:text="${err}"/>
@@ -73,8 +73,8 @@
                                 </div>
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('cookTime')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>Cooktime:</label>
-                                    <input type="text" class="form-control" th:field="*{cookTime}" th:errorclass="has-error"/>
+                                    <label>Cooktime (min.):</label>
+                                    <input type="number" class="form-control" th:field="*{cookTime}" th:errorclass="has-error"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('cookTime')}">
                                         <ul>
                                             <li th:each="err : ${#fields.errors('cookTime')}" th:text="${err}"/>
@@ -102,7 +102,7 @@
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('servings')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
                                     <label>Servings:</label>
-                                    <input type="text" class="form-control" th:field="*{servings}" th:errorclass="has-error"/>
+                                    <input type="number" class="form-control" th:field="*{servings}" th:errorclass="has-error"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('servings')}">
                                         <ul>
                                             <li th:each="err : ${#fields.errors('servings')}" th:text="${err}"/>
